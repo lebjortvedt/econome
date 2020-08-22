@@ -20,6 +20,7 @@ class CreatePaymentTable extends Migration
             $table->integer('vendor_id');
             $table->decimal('amount', 5, 2);
             $table->tinyInteger('subscription');
+            $table->date('paid_at');
             $table->softDeletes();
             $table->timestamps();        
         });
