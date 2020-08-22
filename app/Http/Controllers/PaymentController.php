@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Payment;
+use App\Vendor;
+use App\PaymentCategory;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -26,7 +28,13 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        //
+        $vendors = Vendor::all();
+        $paymentCategories = PaymentCategory::all();
+
+        $data['vendors'] = $vendors;
+        $data['categories'] = $paymentCategories;
+
+        return view('payments.create', compact('data'));
     }
 
     /**
