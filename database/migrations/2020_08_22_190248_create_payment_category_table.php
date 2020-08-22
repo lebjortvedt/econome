@@ -13,7 +13,7 @@ class CreatePaymentCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('payment_category', function (Blueprint $table) {
+        Schema::create('payment_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->softDeletes();
@@ -28,6 +28,6 @@ class CreatePaymentCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment_category');
+        Schema::dropIfExists('payment_categories');
     }
 }

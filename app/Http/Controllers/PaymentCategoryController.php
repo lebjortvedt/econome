@@ -14,7 +14,8 @@ class PaymentCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $paymentCategories = PaymentCategory::all();
+        return view('paymentCategories.index', compact('paymentCategories'));
     }
 
     /**

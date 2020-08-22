@@ -17,9 +17,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('vendor', 'VendorController');
-Route::resource('payment_category', 'PaymentCategoryController');
-Route::resource('payment', 'PaymentController');
+Route::get('/test', function () {
+    return view('test');
+});
+
+
+Route::resource('/vendors', 'VendorController');
+Route::resource('/paymentCategories', 'PaymentCategoryController');
+Route::resource('/payments', 'PaymentController');
+
 
 Auth::routes();
 

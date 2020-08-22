@@ -14,7 +14,9 @@ class VendorController extends Controller
      */
     public function index()
     {
-        //
+        $vendors = Vendor::all();
+
+        return view('vendors.index', compact('vendors'));
     }
 
     /**
@@ -24,7 +26,7 @@ class VendorController extends Controller
      */
     public function create()
     {
-        //
+        return view('vendors.create');
     }
 
     /**
