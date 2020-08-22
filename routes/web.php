@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('vendor', 'VendorController');
+Route::resource('payment_category', 'PaymentCategoryController');
+Route::resource('payment', 'PaymentController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
