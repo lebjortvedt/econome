@@ -37,7 +37,12 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $vendor = new Vendor();
+        $vendor->name = $request->name;      
+        $vendor->save();
+
+        $vendors= Vendor::all();
+        return redirect()->route('vendors.index')->with('success','Vendor created successfully.');
     }
 
     /**

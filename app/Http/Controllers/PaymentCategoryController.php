@@ -25,7 +25,7 @@ class PaymentCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('paymentCategories.create');
     }
 
     /**
@@ -36,7 +36,12 @@ class PaymentCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $paymentCategory = new PaymentCategory();
+        $paymentCategory->name = $request->name;      
+        $paymentCategory->save();
+
+        $paymentCategories= Vendor::all();
+        return redirect()->route('paymentCategories.index')->with('success','Payment category created successfully.');
     }
 
     /**
