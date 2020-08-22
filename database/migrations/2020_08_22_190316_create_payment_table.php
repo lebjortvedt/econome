@@ -19,7 +19,7 @@ class CreatePaymentTable extends Migration
             $table->integer('user_day_id');
             $table->integer('vendor_id');
             $table->decimal('amount', 5, 2);
-            $table->tinyinteget('subscrition');
+            $table->tinyInteger('subscription');
             $table->softDeletes();
             $table->timestamps();        
         });
