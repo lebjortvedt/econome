@@ -17,7 +17,12 @@ class PaymentController extends Controller
     public function index()
     {
         $payments = Payment::all();
-
+    
+        foreach($payments as $payment) {
+            $payment->payment_category = $payment->paymentCategory;
+            $payment->vendor = $payment->vendor;
+        }
+        
         return view('payments.index', compact('payments'));
     }
 
@@ -44,8 +49,20 @@ class PaymentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $isSubscription = ($request->subscription == 'on' ? 1 : 0);
+
+        $payment = New Payment();
+        $payment->payment_category_id = $request->payment_category;
+        $payment->vendor_id = $request->vendor;
+        $payment->amount = $request->amount;
+        $payment->paid_at = $request->date;
+        $payment->subscription = $isSubscription;
+        $payment->save();
+
+        $payments= Payment::all();
+        
+        return redirect()->route('payments.index')->with('success','Payment added successfully.');
     }
 
     /**

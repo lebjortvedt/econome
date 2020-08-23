@@ -11,12 +11,12 @@ class Payment extends Model
 
     public function vendor()
     {
-        return $this->hasOne('App\Vendor');
+        return $this->belongsTo('App\Vendor');
     }
 
     public function paymentCategory()
     {
-        return $this->hasOne('App\PaymentCategory');
+        return $this->belongsTo('App\PaymentCategory');
     }
 
     /**
@@ -25,7 +25,7 @@ class Payment extends Model
      * @var array
      */
     protected $fillable = [
-        'payment_category_id', 'user_day_id', 'vendor_id', 'amount', 'subscription', 'date'
+        'payment_category_id', 'user_day_id', 'vendor_id', 'amount', 'subscription', 'paid_at'
 
     ];
 }

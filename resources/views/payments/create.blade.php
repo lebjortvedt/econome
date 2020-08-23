@@ -43,7 +43,7 @@
             <label for="amount">Amount</label>
             <input type="text" class="form-control" name="amount"/>
         </div>                
-          <button type="submit" class="btn btn-primary-outline">Add payment</button>
+          <button type="submit" class="btn btn-primary">Add payment</button>
       </form>
   </div>
 </div>

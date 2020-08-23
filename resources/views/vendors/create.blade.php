@@ -20,7 +20,7 @@
               <label for="name">Name:</label>
               <input type="text" class="form-control" name="name"/>
           </div>          
-          <button type="submit" class="btn btn-primary-outline">Add vendor</button>
+          <button type="submit" class="btn btn-primary">Add vendor</button>
       </form>
   </div>
 </div>

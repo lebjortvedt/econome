@@ -9,6 +9,11 @@ class PaymentCategory extends Model
 {
     use SoftDeletes;
 
+    public function payments()
+    {
+        return $this->hasMany('App\Payments');
+    }
+
     protected $fillable = [
         'name' ];
 }

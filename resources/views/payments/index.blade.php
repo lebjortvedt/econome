@@ -8,6 +8,8 @@
     <thead>
         <tr>
           <td>ID</td>
+          <td>Vendor</td>
+          <td>Category</td>
           <td>Date</td>    
           <td>Amount</td> 
         </tr>
@@ -16,7 +18,9 @@
         @foreach($payments as $payment)
         <tr>
             <td>{{$payment->id}}</td>
-            <td>{{$payment->date}}</td>
+            <td>{{$payment->vendor->name}}</td>
+            <td>{{$payment->payment_category->name}}</td>
+            <td>{{$payment->paid_at}}</td>
             <td>{{$payment->amount}}</td>           
         </tr>
         @endforeach
