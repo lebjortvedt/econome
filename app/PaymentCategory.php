@@ -11,7 +11,7 @@ class PaymentCategory extends Model
 
     public function payments()
     {
-        return $this->hasMany('App\Payments');
+        return $this->hasMany('App\Payment');
     }
 
     protected $fillable = [

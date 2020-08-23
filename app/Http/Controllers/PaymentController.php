@@ -113,13 +113,26 @@ class PaymentController extends Controller
     public function getDashData()
     {
         $payments = Payment::all();
+
+        $categories = [];
     
         foreach($payments as $payment) {
             $payment->payment_category = $payment->paymentCategory;
             $payment->vendor = $payment->vendor;
+            array_push($categories, $payment->payment_category);
         }
+
+        $uniqueCategories = array_unique($categories);
         
-        return view('dash', compact('payments'));
+        foreach($uniqueCategories as $category) {
+            $catSum = $category->payments->sum('amount');
+            $category->amount=$catSum;
+        }
+
+        $data['categories'] = $uniqueCategories;
+        $data['payments'] = $payments;
+        
+        return view('dash', compact('data'));
     }
 
 }
