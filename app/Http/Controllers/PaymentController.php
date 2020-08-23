@@ -112,25 +112,31 @@ class PaymentController extends Controller
     
     public function getDashData()
     {
+        // Get all the payments of the current month
         $payments = Payment::whereYear('paid_at', '=', date('Y'))
         ->whereMonth('paid_at', '=', date('m'))
         ->get();
 
-        $categories = [];
-    
+        $categories = [];        
+
+        // We want to get the categories from the payments
         foreach($payments as $payment) {
             $payment->payment_category = $payment->paymentCategory;
             $payment->vendor = $payment->vendor;
             array_push($categories, $payment->payment_category);
         }
 
+        // Remove duplicate categories
         $uniqueCategories = array_unique($categories);
         
+        // Loop the categories to get all current months payments
         foreach($uniqueCategories as $category) {
             $catSum = $category->currentMonthPayments->sum('amount');
             $category->amount=$catSum;
         }
 
+        // Collect all the data for the view
+        $data['sum'] = $payments->sum('amount'); 
         $data['categories'] = $uniqueCategories;
         $data['payments'] = $payments;
         

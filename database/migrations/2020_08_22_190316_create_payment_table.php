@@ -18,7 +18,7 @@ class CreatePaymentTable extends Migration
             $table->integer('payment_category_id');
             $table->integer('user_day_id')->nullable();
             $table->integer('vendor_id');
-            $table->decimal('amount', 5, 2);
+            $table->decimal('amount', 8, 2);
             $table->tinyInteger('subscription');
             $table->date('paid_at');
             $table->softDeletes();

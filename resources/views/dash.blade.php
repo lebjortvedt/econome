@@ -3,7 +3,7 @@
 
 <div class="row">
 <div class="col-sm-12">
-    <h1 class="display-3">This month</h1>    
+    <h1 class="display-3">This month's spendings</h1>    
   <table class="table table-striped">
     <thead>
         <tr>
@@ -15,9 +15,12 @@
         @foreach($data['categories'] as $category)
         <tr>
             <td>{{$category->name}}</td>
-            <td>{{$category->amount}}</td>
+            <td>{{$category->amount}}</td> 
         </tr>
         @endforeach
+      </tr>
+      <th>Grand total</th><th>{{ $data['sum']}} </th>
+    <tr>
     </tbody>
   </table>
 <div>
