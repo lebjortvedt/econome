@@ -21,6 +21,8 @@ Route::get('/test', function () {
     return view('test');
 });
 
+Route::get('/dash', 'PaymentController@getDashData')->name('dash');
+
 
 Route::resource('/vendors', 'VendorController');
 Route::resource('/paymentCategories', 'PaymentCategoryController');

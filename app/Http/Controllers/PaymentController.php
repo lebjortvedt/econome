@@ -22,7 +22,7 @@ class PaymentController extends Controller
             $payment->payment_category = $payment->paymentCategory;
             $payment->vendor = $payment->vendor;
         }
-        
+
         return view('payments.index', compact('payments'));
     }
 
@@ -109,4 +109,18 @@ class PaymentController extends Controller
     {
         //
     }
+    
+    public function getDashData()
+    {
+        $payments = Payment::all();
+    
+        foreach($payments as $payment) {
+            $payment->payment_category = $payment->paymentCategory;
+            $payment->vendor = $payment->vendor;
+        }
+        
+        return view('dash', compact('payments'));
+    }
+
 }
+
