@@ -14,6 +14,13 @@ class PaymentCategory extends Model
         return $this->hasMany('App\Payment');
     }
 
+    public function currentMonthPayments()
+    {
+        return $this->hasMany('App\Payment')
+        ->whereYear('paid_at', '=', date('Y'))
+        ->whereMonth('paid_at', '=', date('m'));
+    }
+
     protected $fillable = [
         'name' ];
 }

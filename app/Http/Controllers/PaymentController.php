@@ -127,7 +127,7 @@ class PaymentController extends Controller
         $uniqueCategories = array_unique($categories);
         
         foreach($uniqueCategories as $category) {
-            $catSum = $category->payments->sum('amount');
+            $catSum = $category->currentMonthPayments->sum('amount');
             $category->amount=$catSum;
         }
 
