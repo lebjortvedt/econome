@@ -7,8 +7,8 @@
   <table class="table table-striped">
     <thead>
         <tr>
-          <td>Name</td>     
-          <td>Amount</td> 
+          <td>Category</td>     
+          <td>Sum</td> 
         </tr>
     </thead>
     <tbody>

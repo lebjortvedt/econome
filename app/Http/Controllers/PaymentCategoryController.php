@@ -40,7 +40,7 @@ class PaymentCategoryController extends Controller
         $paymentCategory->name = $request->name;      
         $paymentCategory->save();
 
-        $paymentCategories= Vendor::all();
+        $paymentCategories= PaymentCategory::all();
         return redirect()->route('paymentCategories.index')->with('success','Payment category created successfully.');
     }
 

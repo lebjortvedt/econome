@@ -112,7 +112,9 @@ class PaymentController extends Controller
     
     public function getDashData()
     {
-        $payments = Payment::all();
+        $payments = Payment::whereYear('paid_at', '=', date('Y'))
+        ->whereMonth('paid_at', '=', date('m'))
+        ->get();
 
         $categories = [];
     
