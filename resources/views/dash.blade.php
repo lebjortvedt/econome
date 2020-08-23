@@ -8,7 +8,7 @@
     <thead>
         <tr>
           <td>Category</td>     
-          <td>Sum</td> 
+          <td>Amount</td> 
         </tr>
     </thead>
     <tbody>
@@ -19,7 +19,7 @@
         </tr>
         @endforeach
       </tr>
-      <th>Grand total</th><th>{{ $data['sum']}} </th>
+      <th bgcolor="lightblue">Grand total</th><th bgcolor="lightblue">{{ $data['sum']}} </th>
     <tr>
     </tbody>
   </table>
