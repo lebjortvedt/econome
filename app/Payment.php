@@ -19,13 +19,18 @@ class Payment extends Model
         return $this->belongsTo('App\PaymentCategory');
     }
 
+    public function salaryPeriod()
+    {
+        return $this->belongsTo('App\SalaryPeriod');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'payment_category_id', 'user_day_id', 'vendor_id', 'amount', 'subscription', 'paid_at'
+        'payment_category_id', 'user_day_id', 'vendor_id', 'amount', 'subscription', 'paid_at', 'salary_period_id'
 
     ];
 }

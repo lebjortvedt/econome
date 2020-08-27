@@ -117,6 +117,9 @@ class PaymentController extends Controller
         ->whereMonth('paid_at', '=', date('m'))
         ->get();
 
+        $period = SalaryController::getCurrentPeriod();
+        $periodPayments = Payment::where('salary_period_id', $period->id)->get();
+
         $categories = [];        
 
         // We want to get the categories from the payments
