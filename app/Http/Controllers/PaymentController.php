@@ -6,6 +6,7 @@ use App\Payment;
 use App\Vendor;
 use App\PaymentCategory;
 use Illuminate\Http\Request;
+use App\Http\Controllers\SalaryController;
 
 class PaymentController extends Controller
 {
@@ -52,12 +53,17 @@ class PaymentController extends Controller
     {   
         $isSubscription = ($request->subscription == 'on' ? 1 : 0);
 
+        // $period = SalaryController::getCurrentPeriod();
+
+        // return $period;
+
         $payment = New Payment();
         $payment->payment_category_id = $request->payment_category;
         $payment->vendor_id = $request->vendor;
         $payment->amount = $request->amount;
         $payment->paid_at = $request->date;
         $payment->subscription = $isSubscription;
+        // $payment->salary_period_id = $period->id;
         $payment->save();
 
         $payments= Payment::all();
@@ -118,6 +124,7 @@ class PaymentController extends Controller
         ->get();
 
         $period = SalaryController::getCurrentPeriod();
+
         $periodPayments = Payment::where('salary_period_id', $period->id)->get();
 
         $categories = [];        

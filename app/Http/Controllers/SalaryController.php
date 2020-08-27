@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\SalaryPeriod;
 use Illuminate\Http\Request;
 
-class SalarayController extends Controller
+class SalaryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -83,11 +83,12 @@ class SalarayController extends Controller
         //
     }
 
-    public function getCurrentPeriod()
+    public static function getCurrentPeriod()
     {
         $curDate = date('Y-m-d');
-        $period = SalaryPeriod::where('start_date', '>=', $curDate)
-            ->where('end_date', '=<', $curDate)
+        
+        $period = SalaryPeriod::where('start_date', '<=', $curDate)
+            ->where('end_date', '>=', $curDate)
             ->first();
 
         return $period;        

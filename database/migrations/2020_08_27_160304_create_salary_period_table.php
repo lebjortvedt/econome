@@ -13,7 +13,7 @@ class CreateSalaryPeriodTable extends Migration
      */
     public function up()
     {
-        Schema::create('salary_period', function (Blueprint $table) {
+        Schema::create('salary_periods', function (Blueprint $table) {
             $table->id();
             $table->date('start_date');
             $table->date('end_date');
@@ -29,6 +29,6 @@ class CreateSalaryPeriodTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('salary_period');
+        Schema::dropIfExists('salary_periods');
     }
 }
