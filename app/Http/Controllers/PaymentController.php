@@ -6,6 +6,7 @@ use App\Payment;
 use App\Vendor;
 use App\PaymentCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SalaryController;
 
 class PaymentController extends Controller
@@ -99,6 +100,7 @@ class PaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
+     * 
      */
     public function update(Request $request, Payment $payment)
     {
@@ -118,6 +120,9 @@ class PaymentController extends Controller
     
     public function getDashData()
     {
+        $userId = Auth::id();
+
+        return $userId;
         // Get all the payments of the current month
         $payments = Payment::whereYear('paid_at', '=', date('Y'))
         ->whereMonth('paid_at', '=', date('m'))

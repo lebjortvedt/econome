@@ -21,12 +21,12 @@ Route::get('/test', function () {
     return view('test');
 });
 
-Route::get('/dash', 'PaymentController@getDashData')->name('dash');
+Route::get('/dash', 'PaymentController@getDashData')->name('dash')->middleware('auth');
 
 
-Route::resource('/vendors', 'VendorController');
-Route::resource('/paymentCategories', 'PaymentCategoryController');
-Route::resource('/payments', 'PaymentController');
+Route::resource('/vendors', 'VendorController')->middleware('auth');
+Route::resource('/paymentCategories', 'PaymentCategoryController')->middleware('auth');
+Route::resource('/payments', 'PaymentController')->middleware('auth');
 
 
 Auth::routes();
