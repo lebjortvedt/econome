@@ -15,6 +15,7 @@ class SalaryPeriod extends Model
     }
 
     protected $fillable = [
+        'user_id',
         'start_date',
         'end_date' ];
 }

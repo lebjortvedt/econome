@@ -15,6 +15,7 @@ class CreatePaymentCategoryTable extends Migration
     {
         Schema::create('payment_categories', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->string('name');
             $table->softDeletes();
             $table->timestamps();

@@ -15,7 +15,9 @@ class CreateUserDaysTable extends Migration
     {
         Schema::create('user_days', function (Blueprint $table) {
             $table->id();
+            $table->integer('cday_id');
             $table->integer('user_id');
+            $table->integer('is_payday');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -15,8 +15,10 @@ class CreatePaymentTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->integer('salary_period_id')->nullable();
             $table->integer('payment_category_id');
-            $table->integer('user_day_id')->nullable();
+            $table->integer('cday_id');
             $table->integer('vendor_id');
             $table->decimal('amount', 8, 2);
             $table->tinyInteger('subscription');

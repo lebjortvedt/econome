@@ -15,6 +15,7 @@ class CreateSalaryPeriodTable extends Migration
     {
         Schema::create('salary_periods', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->date('start_date');
             $table->date('end_date');
             $table->softDeletes();
