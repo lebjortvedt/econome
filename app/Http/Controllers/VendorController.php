@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VendorController extends Controller
 {
@@ -14,7 +15,8 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $vendors = Vendor::all();
+        $userId = Auth::id();        
+        $vendors = Vendor::where('user_id', $userId)->get();
 
         return view('vendors.index', compact('vendors'));
     }
@@ -37,8 +39,10 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
+        $userId = Auth::id();   
         $vendor = new Vendor();
-        $vendor->name = $request->name;      
+        $vendor->name = $request->name; 
+        $vendor->user_id = $userId;     
         $vendor->save();
 
         $vendors= Vendor::all();

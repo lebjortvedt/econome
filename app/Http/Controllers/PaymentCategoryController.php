@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\PaymentCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentCategoryController extends Controller
 {
@@ -14,7 +15,8 @@ class PaymentCategoryController extends Controller
      */
     public function index()
     {
-        $paymentCategories = PaymentCategory::all();
+        $userId = Auth::id();
+        $paymentCategories = PaymentCategory::where('user_id', $userId)->get();
         return view('paymentCategories.index', compact('paymentCategories'));
     }
 
@@ -36,8 +38,11 @@ class PaymentCategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $userId = Auth::id();
+
         $paymentCategory = new PaymentCategory();
-        $paymentCategory->name = $request->name;      
+        $paymentCategory->name = $request->name;
+        $paymentCategory->user_id = $userId;
         $paymentCategory->save();
 
         $paymentCategories= PaymentCategory::all();

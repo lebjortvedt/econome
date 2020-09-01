@@ -18,7 +18,8 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $payments = Payment::all();
+        $userId = Auth::id();   
+        $payments = Payment::where('user_id', $userId)->get();
     
         foreach($payments as $payment) {
             $payment->payment_category = $payment->paymentCategory;
@@ -35,8 +36,9 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        $vendors = Vendor::all();
-        $paymentCategories = PaymentCategory::all();
+        $userId = Auth::id();   
+        $vendors = Vendor::where('user_id', $userId)->get();
+        $paymentCategories = PaymentCategory::where('user_id', $userId)->get();
 
         $data['vendors'] = $vendors;
         $data['categories'] = $paymentCategories;
@@ -52,6 +54,7 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {   
+        $userId = Auth::id();   
         $isSubscription = ($request->subscription == 'on' ? 1 : 0);
 
         // $period = SalaryController::getCurrentPeriod();
@@ -64,6 +67,7 @@ class PaymentController extends Controller
         $payment->amount = $request->amount;
         $payment->paid_at = $request->date;
         $payment->subscription = $isSubscription;
+        $payment->user_id = $userId;
         // $payment->salary_period_id = $period->id;
         $payment->save();
 
@@ -122,10 +126,10 @@ class PaymentController extends Controller
     {
         $userId = Auth::id();
 
-        return $userId;
         // Get all the payments of the current month
         $payments = Payment::whereYear('paid_at', '=', date('Y'))
         ->whereMonth('paid_at', '=', date('m'))
+        ->where('user_id', $userId)
         ->get();
 
         $period = SalaryController::getCurrentPeriod();
