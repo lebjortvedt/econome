@@ -20,8 +20,8 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $userId = Auth::id();   
-        $payments = Payment::where('user_id', $userId)->get();
+        $user = Auth::user();   
+        $payments = $user->payments()->get();
     
         foreach($payments as $payment) {
             $payment->payment_category = $payment->paymentCategory;
@@ -38,9 +38,9 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        $userId = Auth::id();   
-        $vendors = Vendor::where('user_id', $userId)->get();
-        $paymentCategories = PaymentCategory::where('user_id', $userId)->get();
+        $user = Auth::user();   
+        $vendors = $user->vendors()->get();
+        $paymentCategories = $user->paymentCategories()->get();
 
         $data['vendors'] = $vendors;
         $data['categories'] = $paymentCategories;
@@ -72,8 +72,6 @@ class PaymentController extends Controller
         $payment->user_id = $userId;
         // $payment->salary_period_id = $period->id;
         $payment->save();
-
-        $payments= Payment::all();
         
         return redirect()->route('payments.index')->with('success','Payment added successfully.');
     }
