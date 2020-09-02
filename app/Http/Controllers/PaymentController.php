@@ -126,6 +126,13 @@ class PaymentController extends Controller
     {
         $userId = Auth::id();
 
+        $curDate = date('Y-m-d');
+        
+        $previousPayDay = UserDay::where('cdate', '=<', $curDate)
+            ->where('user_id', $userId)
+            ->orderBy('cday_id', 'desc')
+            ->first();
+
         // Get all the payments of the current month
         $payments = Payment::whereYear('paid_at', '=', date('Y'))
         ->whereMonth('paid_at', '=', date('m'))

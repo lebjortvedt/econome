@@ -9,6 +9,13 @@ class Vendor extends Model
 {
     use SoftDeletes;
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
     protected $fillable = [
-        'name' ];
+        'name' ,
+        'user_id'
+    ];
 }

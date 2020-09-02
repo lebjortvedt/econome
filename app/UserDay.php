@@ -8,6 +8,11 @@ class UserDay extends Model
 {
     use SoftDeletes;
 
+    public function calendarDay()
+    {
+        return $this->belongsTo('App\CalendarDay');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -15,8 +20,8 @@ class UserDay extends Model
      */
     protected $fillable = [
         'user_id',
-        'cdate'
-
+        'cdate',
+        'cday_id'
     ];
 
 }

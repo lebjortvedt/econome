@@ -24,6 +24,16 @@ class Payment extends Model
         return $this->belongsTo('App\SalaryPeriod');
     }
 
+    public function calendarDay()
+    {
+        return $this->belongsTo('App\CalendarDay');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

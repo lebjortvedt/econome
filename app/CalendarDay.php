@@ -8,6 +8,11 @@ class Calendar extends Model
 {
     use SoftDeletes;
 
+    public function payments()
+    {
+        return $this->hasMany('App\Payment');
+    }
+
      /**
      * The attributes that are mass assignable.
      *

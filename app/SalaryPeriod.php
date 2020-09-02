@@ -14,6 +14,11 @@ class SalaryPeriod extends Model
         return $this->hasMany('App\Payment');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
     protected $fillable = [
         'user_id',
         'start_date',
