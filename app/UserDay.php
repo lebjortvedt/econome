@@ -15,7 +15,7 @@ class UserDay extends Model
      */
     protected $fillable = [
         'user_id',
-        'cday_id'
+        'cdate'
 
     ];
 

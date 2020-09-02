@@ -16,9 +16,9 @@ class CreateCalendarDaysTable extends Migration
         Schema::create('calendar_days', function (Blueprint $table) {
             $table->id();                       
             $table->date('cdate');
-            $table->integer('cyear');
-            $table->integer('cmonth');
-            $table->integer('cday');
+            $table->smallInteger('cyear');
+            $table->smallInteger('cmonth');
+            $table->smallInteger('cday');
             $table->softDeletes();
             $table->timestamps();
         });
