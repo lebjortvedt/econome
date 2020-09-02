@@ -18,11 +18,10 @@ class CreatePaymentTable extends Migration
             $table->integer('user_id');
             $table->integer('salary_period_id')->nullable();
             $table->integer('payment_category_id');
-            $table->integer('cday_id');
+            $table->date('cdate');
             $table->integer('vendor_id');
             $table->decimal('amount', 8, 2);
             $table->tinyInteger('subscription');
-            $table->date('paid_at');
             $table->softDeletes();
             $table->timestamps();        
         });

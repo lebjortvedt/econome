@@ -40,7 +40,7 @@ class Payment extends Model
      * @var array
      */
     protected $fillable = [
-        'payment_category_id', 'cday_id', 'vendor_id', 'amount', 'subscription', 'paid_at', 'salary_period_id', 'user_id'
+        'payment_category_id', 'cdate', 'vendor_id', 'amount', 'subscription', 'salary_period_id', 'user_id'
 
     ];
 }

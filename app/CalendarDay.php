@@ -3,14 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Calendar extends Model
+class CalendarDay extends Model
 {
     use SoftDeletes;
 
     public function payments()
     {
-        return $this->hasMany('App\Payment');
+        return $this->hasMany('App\Payment', 'cdate', 'cdate');
     }
 
      /**

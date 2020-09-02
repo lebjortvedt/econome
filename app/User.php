@@ -10,6 +10,26 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function vendors()
+    {
+        return $this->hasMany('App\Vendor');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany('App\Payment');
+    }
+
+    public function paymentCategories()
+    {
+        return $this->hasMany('App\PaymentCategory');
+    }
+
+    public function userDays()
+    {
+        return $this->hasMany('App\UserDay');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

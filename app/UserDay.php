@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserDay extends Model
 {
@@ -10,7 +11,7 @@ class UserDay extends Model
 
     public function calendarDay()
     {
-        return $this->belongsTo('App\CalendarDay');
+        return $this->belongsTo('App\CalendarDay', 'cdate', 'cdate');
     }
 
     /**
@@ -20,8 +21,7 @@ class UserDay extends Model
      */
     protected $fillable = [
         'user_id',
-        'cdate',
-        'cday_id'
+        'cdate',        
     ];
 
 }

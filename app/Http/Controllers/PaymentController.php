@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Payment;
 use App\Vendor;
 use App\PaymentCategory;
+use App\CalendarDay;
+use App\UserDay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SalaryController;
@@ -65,7 +67,7 @@ class PaymentController extends Controller
         $payment->payment_category_id = $request->payment_category;
         $payment->vendor_id = $request->vendor;
         $payment->amount = $request->amount;
-        $payment->paid_at = $request->date;
+        $payment->cdate = $request->date;
         $payment->subscription = $isSubscription;
         $payment->user_id = $userId;
         // $payment->salary_period_id = $period->id;
@@ -123,33 +125,27 @@ class PaymentController extends Controller
     }
     
     public function getDashData()
-    {
+    {   
+        $curDate = date('Y-m-d');
+
+        $user = auth()->user();
         $userId = Auth::id();
 
-        $curDate = date('Y-m-d');
-        
-        $previousPayDay = UserDay::where('cdate', '=<', $curDate)
-            ->where('user_id', $userId)
+        $previousPayDay = $user->userDays()->where('cdate', '<=', $curDate)            
             ->where('is_payday', 1)
-            ->orderBy('cday_id', 'desc')
+            ->orderBy('cdate', 'desc')
             ->first();
 
-        $previousPayDayId = $previousPayDay->id;
-        
+        $previousPayDayDate = $previousPayDay->cdate;
+    
         $curCalDay = CalendarDay::where('cdate', $curDate);
-
-        $curCalDayId = $curCalDay->id;
+       
 
         // Get all the payments of the current month
-        $payments = Payment::whereYear('paid_at', '=', date('Y'))
-        ->whereMonth('paid_at', '=', date('m'))
-        ->where('user_id', $userId)
-        ->get();
-
-        $period = SalaryController::getCurrentPeriod();
-
-        $periodPayments = Payment::where('salary_period_id', $period->id)->get();
-
+        $payments = $user->payments()->where('cdate', '>=', $previousPayDayDate)
+            ->where('cdate', '<', $curDate)
+            ->get();
+   
         $categories = [];        
 
         // We want to get the categories from the payments
@@ -164,7 +160,8 @@ class PaymentController extends Controller
         
         // Loop the categories to get all current months payments
         foreach($uniqueCategories as $category) {
-            $catSum = $category->currentMonthPayments->sum('amount');
+            $catSum = $category->payments()->where('cdate', '>=', $previousPayDayDate)
+            ->where('cdate', '<', $curDate)->sum('amount');
             $category->amount=$catSum;
         }
 
